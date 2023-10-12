@@ -26,7 +26,7 @@ module.exports = {
 			jsx: true
 		}
 	},
-	plugins: ["react", "@typescript-eslint", "react-hooks", "prettier"],
+	plugins: ["react", "@typescript-eslint", "react-hooks", "prettier", 'simple-import-sort'],
 	/* 继承某些已有的规则 */
 	extends: [
 		"eslint:recommended",
@@ -43,6 +43,7 @@ module.exports = {
 	 * "error" 或 2  ==>  规则作为一个错误（代码不能执行，界面报错）
 	 */
 	rules: {
+		'simple-import-sort/imports': 'error', // 限制导import入顺序
 		// eslint (http://eslint.cn/docs/rules)
 		"no-var": "error", // 要求使用 let 或 const 而不是 var
 		"no-multiple-empty-lines": ["error", { max: 1 }], // 不允许多个空行
@@ -68,5 +69,6 @@ module.exports = {
 		// react (https://github.com/jsx-eslint/eslint-plugin-react)
 		"react-hooks/rules-of-hooks": "off",
 		"react-hooks/exhaustive-deps": "off"
+
 	}
 };

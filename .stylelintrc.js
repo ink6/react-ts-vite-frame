@@ -6,7 +6,7 @@ module.exports = {
 		"stylelint-config-prettier", // 配置stylelint和prettier兼容
 		"stylelint-config-recess-order" // 配置stylelint css属性书写顺序插件,
 	],
-	plugins: ["stylelint-scss"], // 配置stylelint scss拓展插件
+	plugins: ["stylelint-less"], // 配置stylelint less拓展插件
 	rules: {
 		indentation: null, // 指定缩进空格
 		"no-descending-specificity": null, // 禁止在具有较高优先级的选择器后出现被其覆盖的较低优先级的选择器
