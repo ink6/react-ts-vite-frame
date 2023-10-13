@@ -1,8 +1,10 @@
-import LoginForm from './components/LoginForm';
-import SwitchDark from '@/components/SwitchDark';
+import './index.less';
+
 import loginLeft from '@/assets/images/login_left.png';
 import logo from '@/assets/images/logo.png';
-import './index.less';
+import SwitchDark from '@/components/SwitchDark';
+
+import LoginForm from './components/LoginForm';
 
 const Login = () => {
 	return (

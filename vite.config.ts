@@ -1,10 +1,10 @@
-import { defineConfig, loadEnv, ConfigEnv, UserConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { createHtmlPlugin } from 'vite-plugin-html';
+import { ConfigEnv, defineConfig, loadEnv, UserConfig } from 'vite';
 import viteCompression from 'vite-plugin-compression';
 import eslintPlugin from 'vite-plugin-eslint';
+import { createHtmlPlugin } from 'vite-plugin-html';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 
 // @see: https://vitejs.dev/config/

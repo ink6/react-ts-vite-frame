@@ -1,5 +1,6 @@
 import { Switch } from 'antd';
 import { connect } from 'react-redux';
+
 import { setThemeConfig } from '@/redux/modules/global/action';
 
 const SwitchDark = (props: any) => {

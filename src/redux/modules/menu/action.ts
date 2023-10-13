@@ -1,17 +1,18 @@
-import * as types from "@/redux/mutation-types";
-import { getMenuList } from "@/api/modules/login";
-import { Dispatch } from "react";
+import { Dispatch } from 'react';
+
+import { getMenuList } from '@/api/modules/login';
+import * as types from '@/redux/mutation-types';
 
 // * updateCollapse
 export const updateCollapse = (isCollapse: boolean) => ({
 	type: types.UPDATE_COLLAPSE,
-	isCollapse
+	isCollapse,
 });
 
 // * setMenuList
 export const setMenuList = (menuList: Menu.MenuOptions[]) => ({
 	type: types.SET_MENU_LIST,
-	menuList
+	menuList,
 });
 
 // ? 下面方法仅为测试使用，不参与任何功能开发
@@ -25,7 +26,7 @@ export const getMenuListActionThunk = () => {
 		const res = await getMenuList();
 		dispatch({
 			type: types.SET_MENU_LIST,
-			menuList: (res.data as Menu.MenuOptions[]) ?? []
+			menuList: (res.data as Menu.MenuOptions[]) ?? [],
 		});
 	};
 };
@@ -35,7 +36,7 @@ export const getMenuListAction = async (): Promise<MenuProps> => {
 	const res = await getMenuList();
 	return {
 		type: types.SET_MENU_LIST,
-		menuList: res.data ? res.data : []
+		menuList: res.data ? res.data : [],
 	};
 };
 
@@ -44,7 +45,7 @@ export const getMenuListActionPromise = (): Promise<MenuProps> => {
 	return getMenuList().then(res => {
 		return {
 			type: types.SET_MENU_LIST,
-			menuList: res.data ? res.data : []
+			menuList: res.data ? res.data : [],
 		};
 	});
 };

@@ -1,18 +1,19 @@
-import { useState, useEffect } from 'react';
-import { getBrowserLang } from '@/utils/util';
-import { ConfigProvider } from 'antd';
-import { connect } from 'react-redux';
-import { setLanguage } from '@/redux/modules/global/action';
-import { HashRouter } from 'react-router-dom';
-import AuthRouter from '@/routers/utils/authRouter';
-import Router from '@/routers/index';
-import useTheme from '@/hooks/useTheme';
-import zhCN from 'antd/lib/locale/zh_CN';
-import enUS from 'antd/lib/locale/en_US';
 import '@/language/index';
-
-import i18n from 'i18next';
 import 'moment/dist/locale/zh-cn';
+
+import { ConfigProvider } from 'antd';
+import enUS from 'antd/lib/locale/en_US';
+import zhCN from 'antd/lib/locale/zh_CN';
+import i18n from 'i18next';
+import { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { HashRouter } from 'react-router-dom';
+
+import useTheme from '@/hooks/useTheme';
+import { setLanguage } from '@/redux/modules/global/action';
+import Router from '@/routers/index';
+import AuthRouter from '@/routers/utils/authRouter';
+import { getBrowserLang } from '@/utils/util';
 
 const App = (props: any) => {
 	const { language, assemblySize, themeConfig, setLanguage } = props;
