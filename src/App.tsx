@@ -33,8 +33,6 @@ const App = (props: any) => {
 
 	useEffect(() => {
 		// 全局使用国际化
-		console.log(language, getBrowserLang(), i18n);
-
 		i18n.changeLanguage(language || getBrowserLang());
 		setLanguage(language || getBrowserLang());
 		setAntdLanguage();

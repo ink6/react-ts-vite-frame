@@ -1,7 +1,8 @@
 import React from 'react';
-import lazyLoad from '@/routers/utils/lazyLoad';
+
 import { LayoutIndex } from '@/routers/constant';
 import { RouteObject } from '@/routers/interface';
+import lazyLoad from '@/routers/utils/lazyLoad';
 
 // 外部链接模块
 const linkRouter: Array<RouteObject> = [

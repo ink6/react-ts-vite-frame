@@ -1,6 +1,7 @@
 import React from 'react';
-import lazyLoad from '@/routers/utils/lazyLoad';
+
 import { RouteObject } from '@/routers/interface';
+import lazyLoad from '@/routers/utils/lazyLoad';
 
 // 数据大屏模块
 const dataScreenRouter: Array<RouteObject> = [

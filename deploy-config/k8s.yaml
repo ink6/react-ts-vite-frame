@@ -1,0 +1,90 @@
+apiVersion: apps/v1 #指定api版本标签
+kind: Deployment #定义资源的类型，可以为Deployment，Job，Ingress，Service等
+metadata: #定义资源元数据信息，如资源名称，namespace，标签等信息
+  name: ink-website #定义资源名称，在同一个namespace空间中必须是唯一的
+  # namespace: kube-public        #定义namespace，默认为default
+  # labels:                       #定义Deployment资源标签，可定义多个标签
+  #   app: myapp
+spec: #定义资源的参数属性
+  replicas: 1 #定义副本数量，默认值为1
+  minReadySeconds: 10 #设置pod准备就绪的最小秒数
+  revisionHistoryLimit: 10 #设置保留的历史版本个数，默认是10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1 #滚动升级时最大同时升级1个pod
+      maxUnavailable: 0 #滚动升级时最大允许不可用的pod个数
+  selector: #定义标签选择器
+    matchLabels: #定义匹配标签
+      app: ink-website #指定pod的标签
+  template: #定义pod的模板
+    metadata: #定义pod的元数据信息
+      labels: #定义pod副本将使用的标签
+        app: ink-website #与标签选择器定义的标签相同，否则无法管理生成的pod
+    spec:
+      containers: #定义容器属性
+        - name: ink-website #定义一个容器名，一个name：定义一个容器
+          image: registry.ink.com/ink-en-image/xxx #定义容器使用的镜像以及版本
+          resources:
+            limits: #资源限制的设置
+              memory: 0.25Gi #内存限制，单位可以为Mib/Gib，将用于docker run --memory参数
+          ports:
+            - name: http #定义端口名称
+              containerPort: 80 #定义容器对外的端口
+          startupProbe:
+            httpGet:
+              path: /
+              port: 80
+            failureThreshold: 30
+            periodSeconds: 2
+          livenessProbe: #就绪探测
+            httpGet: #对Pod内个容器健康检查方法设置为HttpGet，需要制定Path、port
+              path: /
+              port: 80
+            periodSeconds: 10 #设置执行探测的频率（以秒为单位），默认1s
+          readinessProbe: #同livenessProbe
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 3 #设置执行探测的频率（以秒为单位），默认1s
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 2
+      imagePullSecrets: #Pull镜像时使用的secret名称，以key：secretkey格式指定
+        - name: ink-dev-auth
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ink-website
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  selector:
+    app: ink-website
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ot-minisite-ingress
+spec:
+  rules:
+    - host: test-abao.ink.cn
+      http:
+        paths:
+          - path: '/'
+            pathType: Prefix
+            backend:
+              service:
+                name: ink-website
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - test-abao.ink.cn
+      secretName: ink.cn
